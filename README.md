@@ -2,6 +2,10 @@
 
 A collection of software routines written by me to perform various tasks.
 
+## bashrc_cloud
+
+A collection of bash run commands, to be sourced in the main .bashrc file and symbolically linked in the home directory.
+
 ## getbib
 
 A routine to grab/update bibtex entries from ADS, using papers in a given folder as an input. 
