@@ -1,0 +1,25 @@
+# setup
+PS1='\u@\h \w\$ '
+alias bashrc='vi ~/.bashrc'
+alias bashcloud='vi ~/.bashrc_cloud'
+alias bashlocal='vi ~/.bashrc_local'
+alias sourcebash='source ~/.bashrc'
+
+# ls aliases
+alias ls='/bin/ls --color=auto'
+alias la='/bin/ls -A --color=auto'
+alias l1='/bin/ls -1 --color=auto'
+alias la1='/bin/ls -A1 --color=auto'
+alias l='/bin/ls -l --color=auto'
+alias ll='/bin/ls -Al --color=auto'
+alias lh='/bin/ls -lh --color=auto'
+alias lah='/bin/ls -Alh --color=auto'
+alias ltr='/bin/ls -ltr --color=auto'
+alias lhtr='/bin/ls -lhtr --color=auto'
+alias latr='/bin/ls -lAtr --color=auto'
+alias lahtr='/bin/ls -lAhtr --color=auto'
+
+# source local bashrc file
+if [ -f ~/.bashrc_local ]; then
+    . ~/.bashrc_local
+fi
