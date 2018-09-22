@@ -8,6 +8,7 @@ alias sourcebash='source ~/.bashrc'
 # base code
 alias getbib='~/upsilon/getbib.R'
 alias papers='~/upsilon/papers.R'
+alias kindleclip='~/upsilon/kindleclip.R'
 
 # ls aliases
 alias ls='/bin/ls --color=auto'
