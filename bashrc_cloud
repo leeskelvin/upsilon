@@ -5,6 +5,10 @@ alias bashcloud='vi ~/.bashrc_cloud'
 alias bashlocal='vi ~/.bashrc_local'
 alias sourcebash='source ~/.bashrc'
 
+# base code
+alias getbib='~/upsilon/getbib.R'
+alias papers='~/upsilon/papers.R'
+
 # ls aliases
 alias ls='/bin/ls --color=auto'
 alias la='/bin/ls -A --color=auto'
