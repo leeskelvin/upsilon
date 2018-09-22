@@ -4,7 +4,7 @@ A collection of software routines written by me to perform various tasks.
 
 ## bashrc_cloud
 
-A collection of bash run commands, to be sourced in the main .bashrc file and symbolically linked in the home directory. 
+A collection of bash run commands, to be sourced in the main .bashrc file and symbolically linked to in the home directory. 
 
 ## getbib
 
@@ -18,4 +18,8 @@ A routine to parse notes from a Kindle 'My Clippings.txt' file and produce a sin
 
 ## papers
 
-A routine to display, search and access all papers stored on a machine via a bibtex.rds file generated via getbib.
+A routine to display, search and access all papers stored on a machine via a bibtex.rds file generated via getbib. 
+
+## Renviron/Rprofile
+
+Default R files, to be symbolically linked to in the home directory. 
