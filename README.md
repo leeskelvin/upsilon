@@ -1,10 +1,10 @@
 # UPSILON: Useful Personal Software I Lacked Or Needed
 
-A collection of software routines written by me to perform various tasks.
+A collection of software routines written by me to perform various tasks. 
 
 ## bashrc_cloud
 
-A collection of bash run commands, to be sourced in the main .bashrc file and symbolically linked in the home directory.
+A collection of bash run commands, to be sourced in the main .bashrc file and symbolically linked in the home directory. 
 
 ## getbib
 
@@ -15,3 +15,7 @@ Papers must be in the form RefID::ADSID.pdf.
 ## kindleclip
 
 A routine to parse notes from a Kindle 'My Clippings.txt' file and produce a single notes file for a given document. 
+
+## papers
+
+A routine to display, search and access all papers stored on a machine via a bibtex.rds file generated via getbib.
