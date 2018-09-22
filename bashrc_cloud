@@ -27,3 +27,4 @@ alias lahtr='/bin/ls -lAhtr --color=auto'
 if [ -f ~/.bashrc_local ]; then
     . ~/.bashrc_local
 fi
+
