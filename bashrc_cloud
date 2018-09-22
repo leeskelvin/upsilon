@@ -10,9 +10,9 @@ alias getbib='~/upsilon/getbib.R'
 alias papers='~/upsilon/papers.R'
 alias kindleclip='~/upsilon/kindleclip.R'
 
-# ds9
+# software reworking
 alias ds9='ds9 -cmap sls -scale log -scale mode 99.5 -wcs degrees -mecube $@'
-
+alias R='R -q'
 
 # ls aliases
 alias ls='/bin/ls --color=auto'
