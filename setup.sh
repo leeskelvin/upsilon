@@ -6,8 +6,8 @@ ln -s upsilon/Rprofile ~/.Rprofile
 
 echo "
 # source local bashrc file
-if [ -f ~/.bashrc_local ]; then
-    . ~/.bashrc_local
+if [ -f ~/.bashrc_cloud ]; then
+    . ~/.bashrc_cloud
 fi
 " >> ~/.bashrc
 
