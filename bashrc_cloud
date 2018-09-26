@@ -31,7 +31,7 @@ alias lahtr='/bin/ls -lAhtr --color=auto'
 alias g='/bin/ls -gG --color=auto'
 alias gg='/bin/ls -AgG --color=auto'
 alias gh='/bin/ls -gGh --color=auto'
-alias ggh='/bin/ls -AgGg --color=auto'
+alias ggh='/bin/ls -AgGgh --color=auto'
 
 # source local bashrc file
 if [ -f ~/.bashrc_local ]; then
