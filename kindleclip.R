@@ -4,19 +4,19 @@ clippings = commandArgs(TRUE)
 
 if(length(clippings) == 0){
     
-    clippings = system('zenity --title "Kindle Clippings" --file-selection --file-selection="*.txt"', intern=TRUE)
+    clippings = system('zenity --title "Kindle Clippings" --file-selection --file-selection="*.txt" 2>/dev/null', intern=TRUE)
     
 }
 
-text = c("==========", readLines(clippings))
+text = suppressWarnings(c("==========", readLines(clippings)))
 
-text = gsub("﻿", "", text) # hidden characters
+text = gsub("", "", text) # hidden characters
 
 starts = grep("==========", text)
 
 names = text[starts+1]
 
-selection = system(paste('zenity --list --title "Kindle Clippings" --text "Select a document from the list:" --column "Name" --hide-header ', paste(sort(unique(paste0('"',names,'"'))), sep="", collapse=" ")), intern=TRUE)
+selection = system(paste('zenity --list --title "Kindle Clippings" --text "Select a document from the list:" --column "Name" --hide-header ', paste(sort(unique(paste0('"',names,'"'))), sep="", collapse=" "), "2>/dev/null"), intern=TRUE)
 
 goods = starts[which(names %in% selection)]
 
@@ -24,7 +24,8 @@ ids = text[goods+2]
 
 times = substr(ids, nchar(ids)-(7), nchar(ids))
 
-res = array(dim=c(0,3)); colnames(res) = c("page", "hilite", "note")
+res = data.frame(page=numeric(0), hilite=character(0), note=character(0), stringsAsFactors=FALSE)
+
 for(i in 1:length(goods)){
     
     start = starts[which(starts == goods[i])]
@@ -35,7 +36,7 @@ for(i in 1:length(goods)){
     
     if(length(grep("Your Highlight on page", text[goods[i]+2])) > 0){
         
-        page = strsplit(strsplit(text[start+2], " +")[[1]][6], "-")[[1]][1]
+        page = as.numeric(strsplit(strsplit(text[start+2], " +")[[1]][6], "-")[[1]][1])
         hilite = text[(start+4):(end-1)]
         
         if(length(which(times %in% times[i])) > 1){ # note before highlight
@@ -53,7 +54,7 @@ for(i in 1:length(goods)){
         
         if(note != ""){
             
-            res = rbind(res, c(page, hilite, note))
+            res[nrow(res)+1,] = list(page,hilite,note)
             
         }
         
