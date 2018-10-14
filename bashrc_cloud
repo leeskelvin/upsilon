@@ -15,6 +15,20 @@ alias kindleclip='~/upsilon/kindleclip.R'
 alias ds9='ds9 -cmap sls -scale log -scale mode 99.5 -wcs degrees -mecube $@'
 alias R='R -q'
 
+# PDF shrink function
+function shrinkpdf {
+    nPDFSETTINGS=$2
+    if [ -z "$nPDFSETTINGS" ] || [ $nPDFSETTINGS -ge 5 ]; then nPDFSETTINGS="0"; fi
+    if [ $nPDFSETTINGS == 0 ]; then dPDFSETTINGS="/default"; fi
+    if [ $nPDFSETTINGS == 1 ]; then dPDFSETTINGS="/screen"; fi
+    if [ $nPDFSETTINGS == 2 ]; then dPDFSETTINGS="/ebook"; fi
+    if [ $nPDFSETTINGS == 3 ]; then dPDFSETTINGS="/prepress"; fi
+    if [ $nPDFSETTINGS == 4 ]; then dPDFSETTINGS="/printer"; fi
+    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=$dPDFSETTINGS -dNOPAUSE -dQUIET -dBATCH -sOutputFile="${1%%.*}.small.${1##*.}" "$1"
+    unset nPDFSETTINGS
+    unset dPDFSETTINGS
+}
+
 # ls aliases
 alias ls='/bin/ls --color=auto'
 alias la='/bin/ls -A --color=auto'
