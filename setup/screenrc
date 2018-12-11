@@ -1,0 +1,40 @@
+# disable startup message
+startup_message off
+
+# disable flashing screen when tab completing, etc...
+vbell off
+bell_msg ""
+
+# set bash as shell
+shell "/bin/bash"
+
+# enable scroll-wheel scrolling
+#termcapinfo xterm* ti@:te@ # doesn't really work as expected: use crtl-A Esc
+
+# fix text remaining on screen when using text editor bug
+altscreen on
+
+# status bar syntax
+# %{.kW}    set background to black, foreground (text) to bright white
+# %-w       list all previous windows behind current active window
+# %{.B}     set background colours to bright blue
+# %n        window number
+# %{-}      reset colours
+# %?%+w%?%  list all upcoming windows ahead of current active window
+# %{=b kw}  set bold font
+# %=        soft horizontal expand
+# %Y-%m-%d  YEAR-MONTH-DAY
+# %c        time (24 hour)
+
+# setup last line status bar
+hardstatus on
+hardstatus alwayslastline
+#hardstatus string "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+hardstatus string "%{.KW}%-w%{.WK}%n %{-}%?%+w%?%{=b KW} %=[%Y-%m-%d %c]"
+#hardstatus string "%{.kW}%-w%{.B}%n %{-}%?%+w%?%{=b kw} %=[%Y-%m-%d %c]"
+#hardstatus string "%{.kW}%-w%{.B}%n %t%{-}%{=b kw}%?%+w%? %=||%Y-%m-%d %c" # B&W & date&time
+#hardstatus string "%{= kG}[%{G}%H]%{g}[%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c%{g}]"
+
+# disable screen titles
+shelltitle ""
+
