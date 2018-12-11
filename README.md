@@ -2,9 +2,11 @@
 
 A collection of software routines written by me to perform various tasks. 
 
-## bashrc_cloud
+## setup
 
-A collection of bash run commands, to be sourced in the main .bashrc file and symbolically linked to in the home directory. 
+Folder containing basic files required to set up a new computer. Sets up bash, R, screen, nautilus, Dropbox, Chrome, GALFIT, IMFIT and many more.
+
+On cloning upsilon repository, execute ./setup.sh to begin setup process. Warning: this will take some time on a fresh machine. 
 
 ## getbib
 
@@ -20,6 +22,3 @@ A routine to parse notes from a Kindle 'My Clippings.txt' file and produce a sin
 
 A routine to display, search and access all papers stored on a machine via a bibtex.rds file generated via getbib. 
 
-## Renviron/Rprofile
-
-Default R files, to be symbolically linked to in the home directory. 
