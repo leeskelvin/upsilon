@@ -12,9 +12,9 @@ ln -sf "$(pwd)"/screenrc ~/.screenrc
 mkdir -p ~/.templates
 ln -sf "$(pwd)"/Rscript.R ~/.templates/Rscript.R
 ln -sf "$(pwd)"/untitled ~/.templates/untitled
-if [ ! -f ~/Templates ]; then
-sed -i 's/Templates/.templates/g' ~/.config/user-dirs.dirs
 rm -Rf ~/Templates
+if [ -f ~/.config/user-dirs.dirs ]; then
+sed -i 's/Templates/.templates/g' ~/.config/user-dirs.dirs
 fi
 
 # modify bashrc to read bashrc_cloud
