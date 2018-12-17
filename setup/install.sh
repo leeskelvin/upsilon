@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# move close buttons to left
+gsettings set org.gnome.desktop.wm.preferences button-layout 'close,maximize,minimize:'
+
 # bring back nautilus type ahead find
 if [ ! -f /etc/apt/sources.list.d/lubomir-brindza-ubuntu-nautilus-typeahead-bionic.list ]; then
 sudo add-apt-repository ppa:lubomir-brindza/nautilus-typeahead

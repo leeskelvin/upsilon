@@ -13,9 +13,6 @@ sed -i 's/Templates/.templates/g' ~/.config/user-dirs.dirs
 rm -Rf ~/Templates
 ln -sf "$(pwd)"/screenrc ~/.screenrc
 
-# move close buttons to left
-gsettings set org.gnome.desktop.wm.preferences button-layout 'close,maximize,minimize:'
-
 # modify bashrc to read bashrc_cloud
 if ! grep -q "source local bashrc file" ~/.bashrc; then
 echo "
