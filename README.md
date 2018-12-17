@@ -6,7 +6,9 @@ A collection of software routines written by me to perform various tasks.
 
 Folder containing basic files required to set up a new computer. Sets up bash, R, screen, nautilus, Dropbox, Chrome, GALFIT, IMFIT and many more.
 
-On cloning upsilon repository, execute ./setup.sh to begin setup process. Warning: this will take some time on a fresh machine. 
+The script has been split into two parts: setup and install. The former performs basic file linking (mostly bash), whilst the latter installs several useful pieces of software. The former is usually all that's required for a remote server, whilst both are recommended for a full desktop setup.
+
+On cloning upsilon repository, execute ./setup.sh to begin setup process and ./install.sh to begin the install process (Warning: this will take some time on a fresh machine).
 
 ## getbib
 
