@@ -6,12 +6,16 @@ mkdir -p ~/.R/lib
 ln -sf "$(pwd)"/bashrc_cloud ~/.bashrc_cloud
 ln -sf "$(pwd)"/Renviron ~/.Renviron
 ln -sf "$(pwd)"/Rprofile ~/.Rprofile
+ln -sf "$(pwd)"/screenrc ~/.screenrc
+
+# templates
 mkdir -p ~/.templates
 ln -sf "$(pwd)"/Rscript.R ~/.templates/Rscript.R
 ln -sf "$(pwd)"/untitled ~/.templates/untitled
+if [ ! -f ~/Templates ]; then
 sed -i 's/Templates/.templates/g' ~/.config/user-dirs.dirs
 rm -Rf ~/Templates
-ln -sf "$(pwd)"/screenrc ~/.screenrc
+fi
 
 # modify bashrc to read bashrc_cloud
 if ! grep -q "source local bashrc file" ~/.bashrc; then
