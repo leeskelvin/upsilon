@@ -2,7 +2,6 @@
 
 # setup
 #require("astro", quietly=TRUE)
-#require("astroextras", quietly=TRUE")
 
 # definitions
 
