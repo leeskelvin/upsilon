@@ -13,7 +13,7 @@ alias kindleclip='~/software/upsilon/kindleclip.R'
 
 # software reworking
 alias ds9='ds9 -mode region -regions shape projection -cmap sls -scale log -scale mode 99.5 -wcs degrees -mecube $@'
-alias R='R -q'
+alias R='R -q --no-save'
 
 # PDF shrink function
 function shrinkpdf {
