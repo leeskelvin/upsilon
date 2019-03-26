@@ -65,7 +65,7 @@ make -j4
 make check
 sudo make install
 if [ ! -f /usr/lib/libgnuastro.so.5 ]; then
-sudo ln -sf ~/software/gnuastro/lib/.libs/libgnuastro.so.5 /usr/lib/
+sudo ln -sf ~/software/gnuastro/lib/.libs/libgnuastro.so.6 /usr/lib/
 fi
 cd $CWD
 wget -P ~/software/gnuastro/ https://www.gnu.org/software/gnuastro/manual/gnuastro.pdf
