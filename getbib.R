@@ -1,7 +1,7 @@
 #!/usr/bin/Rscript --no-init-file
 
 # definitions
-indir = normalizePath("~/Dropbox/work/papers")
+indir = normalizePath("~/Dropbox/work/archive")
 outrds = paste(indir, "/bibtex.rds", sep="")
 outbib = paste(indir, "/bibtex.bib", sep="")
 #outtemp = paste(indir, "/bibtex.temp.rds", sep="")
