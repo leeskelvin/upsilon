@@ -8,6 +8,7 @@ PROMPT_COMMAND='echo -ne "\033]0;${USER%@*}@${HOSTNAME%%.*} | ${PWD##*/}\007"'
 
 # base code
 alias getbib='~/software/upsilon/getbib.R'
+alias setbib='~/software/upsilon/setbib.R'
 alias papers='~/software/upsilon/papers.R'
 alias kindleclip='~/software/upsilon/kindleclip.R'
 
