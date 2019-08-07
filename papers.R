@@ -51,7 +51,7 @@ papers -a,--all         (print full paper titles, no truncation)
     varnum = grep("-o", inputargs) + 1
     myfile = files[grep(tolower(inputargs[varnum]), tolower(files))]
     if(length(myfile) > 0){
-        comm = paste(reader, " ", indir, "/", myfile, " &", sep="")
+        comm = paste(reader, ' "', indir, '/', myfile, '" &', sep="")
         system(comm)
     }else{
         cat("ERROR: no file found\n")
