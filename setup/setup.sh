@@ -49,8 +49,3 @@ alias lsstdev='ssh -X lskelvin@lsst-dev01.ncsa.illinois.edu'
 " >> ~/.bashrc_local
 fi
 
-# ssh keygen
-if [ ! -f ~/.ssh/id_rsa ]; then
-/usr/bin/ssh-keygen
-fi
-

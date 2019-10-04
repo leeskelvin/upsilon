@@ -50,8 +50,6 @@ function pdfwc {
 # ls aliases
 alias ls='/bin/ls --color=auto'
 alias la='/bin/ls -A --color=auto'
-alias l1='/bin/ls -1 --color=auto'
-alias la1='/bin/ls -A1 --color=auto'
 alias l='/bin/ls -l --color=auto'
 alias ll='/bin/ls -Al --color=auto'
 alias lh='/bin/ls -lh --color=auto'
@@ -63,7 +61,7 @@ alias lahtr='/bin/ls -lAhtr --color=auto'
 alias g='/bin/ls -gG --color=auto'
 alias gg='/bin/ls -AgG --color=auto'
 alias gh='/bin/ls -gGh --color=auto'
-alias ggh='/bin/ls -AgGgh --color=auto'
+alias ggh='/bin/ls -AgGh --color=auto'
 
 # source local bashrc file
 if [ -f ~/.bashrc_local ]; then
