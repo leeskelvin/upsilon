@@ -1,0 +1,20 @@
+[user]
+	name = Lee Kelvin
+	email = lkelvin@astro.princeton.edu
+[core]
+	editor = nano
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[push]
+	default = simple
+
+# Cache anonymous access to DM Git LFS S3 servers
+[credential "https://lsst-sqre-prod-git-lfs.s3-us-west-2.amazonaws.com"]
+	helper = store
+[credential "https://s3.lsst.codes"]
+	helper = store
+[credential]
+	helper = store

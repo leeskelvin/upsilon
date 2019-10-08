@@ -11,7 +11,7 @@ fi
 # wanted packages
 sudo apt-get update
 sudo apt-get --with-new-pkgs upgrade
-sudo apt-get install synaptic apt-xapian-index r-base-dev gdebi gedit-plugins python-pip python3-pip gnome-tweak-tool nautilus-dropbox alien astromatic gparted calibre cmake cronutils dconf-editor default-jdk vim eog-plugins ffmpeg fftw-dev ftools-fv gimp inkscape inotify-tools iraf-dev iraf-wcstools jblas jupyter leafpad libatlas-base-dev libcfitsio-dev libclblas-dev libfftw3-dev libfftw3-3 libnlopt-dev libwcstools-dev libwcs5 meld nautilus-compare plplot-tcl-dev screen texlive-full tk-dev topcat ubuntu-dev-tools wcslib-dev wcslib-tools wcstools vlc saods9 libcfitsio-bin gsl-bin libgsl-dev scons unrar
+sudo apt-get install synaptic apt-xapian-index r-base-dev gdebi gedit-plugins python-pip python3-pip gnome-tweak-tool nautilus-dropbox alien astromatic gparted calibre cmake cronutils dconf-editor default-jdk vim eog-plugins ffmpeg fftw-dev ftools-fv gimp inkscape inotify-tools iraf-dev iraf-wcstools jblas jupyter leafpad libatlas-base-dev libcfitsio-dev libclblas-dev libfftw3-dev libfftw3-3 libnlopt-dev libwcstools-dev libwcs5 meld nautilus-compare plplot-tcl-dev screen texlive-full tk-dev topcat ubuntu-dev-tools wcslib-dev wcslib-tools wcstools vlc saods9 libcfitsio-bin gsl-bin libgsl-dev scons unrar git-lfs
 
 # google chrome
 if [ ! -f /usr/bin/google-chrome ]; then

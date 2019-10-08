@@ -7,6 +7,8 @@ ln -sf "$(pwd)"/bashrc_cloud ~/.bashrc_cloud
 ln -sf "$(pwd)"/Renviron ~/.Renviron
 ln -sf "$(pwd)"/Rprofile ~/.Rprofile
 ln -sf "$(pwd)"/screenrc ~/.screenrc
+ln -sf "$(pwd)"/gitconfig ~/.gitconfig
+ln -sf "$(pwd)"/git-credentials ~/.git-credentials
 
 # templates
 mkdir -p ~/.templates
