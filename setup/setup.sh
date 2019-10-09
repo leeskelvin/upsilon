@@ -9,6 +9,7 @@ ln -sf "$(pwd)"/Renviron ~/.Renviron
 ln -sf "$(pwd)"/Rprofile ~/.Rprofile
 ln -sf "$(pwd)"/screenrc ~/.screenrc
 ln -sf "$(pwd)"/gitconfig ~/.gitconfig
+ln -sf "$(pwd)"/vimrc ~/.vimrc
 ln -sf "$(pwd)"/ftplugin-c.vim ~/.vim/ftplugin/c.vim
 ln -sf "$(pwd)"/ftplugin-python.vim ~/.vim/ftplugin/python.vim
 
