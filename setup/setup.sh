@@ -3,12 +3,14 @@
 # files/dirs/links
 touch ~/.bashrc_local
 mkdir -p ~/.R/lib
+mkdir -p ~/.vim/ftplugin
 ln -sf "$(pwd)"/bashrc_cloud ~/.bashrc_cloud
 ln -sf "$(pwd)"/Renviron ~/.Renviron
 ln -sf "$(pwd)"/Rprofile ~/.Rprofile
 ln -sf "$(pwd)"/screenrc ~/.screenrc
 ln -sf "$(pwd)"/gitconfig ~/.gitconfig
-ln -sf "$(pwd)"/git-credentials ~/.git-credentials
+ln -sf "$(pwd)"/ftplugin-c.vim ~/.vim/ftplugin/c.vim
+ln -sf "$(pwd)"/ftplugin-python.vim ~/.vim/ftplugin/python.vim
 
 # templates
 mkdir -p ~/.templates
