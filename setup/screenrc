@@ -9,7 +9,7 @@ bell_msg ""
 shell "/bin/bash"
 
 # enable scroll-wheel scrolling
-#termcapinfo xterm* ti@:te@ # doesn't really work as expected: use crtl-A Esc
+termcapinfo xterm* ti@:te@ # doesn't really work as expected: use crtl-A Esc
 
 # fix text remaining on screen when using text editor bug
 altscreen on
