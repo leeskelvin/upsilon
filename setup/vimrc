@@ -8,5 +8,4 @@ set cindent
 set mouse=a
 filetype plugin indent on
 syntax on
-:startinsert
 
