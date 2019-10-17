@@ -51,6 +51,14 @@ alias physauth='ssh lskelvin@physauth.physics.ucdavis.edu'
 alias xemerald='ssh -t lskelvin@physauth.physics.ucdavis.edu \"ssh -t lskelvin@emerald.physics.ucdavis.edu bash\"'
 alias minos='ssh -X lkelvin@minos.astro.princeton.edu'
 alias lsstdev='ssh -X lskelvin@lsst-dev01.ncsa.illinois.edu'
+alias ldmount='mkdir -p ~/ldmount; sshfs lskelvin@lsst-dev01.ncsa.illinois.edu:/home/lskelvin ~/ldmount'
+alias ldunmount='fusermount -u ~/ldmount; echo "ldmount file listing:"; ls -lA ~/ldmount; rm -iR ~/ldmount'
+alias xstart='xpra start :5525; export DISPLAY=:5525'
+alias xstop='xpra stop'
+alias xattach='xpra attach ssh:lskelvin@lsst-dev01.ncsa.illinois.edu:5525'
+alias xdetach='xpra detach ssh:lskelvin@lsst-dev01.ncsa.illinois.edu:5525'
+alias tigressgateway='ssh -Xt lkelvin@tigressgateway.princeton.edu'
+alias tiger='ssh -Xt lkelvin@tigressgateway.princeton.edu "ssh -Xt lkelvin@tiger2-sumire.princeton.edu bash"'
 " >> ~/.bashrc_local
 fi
 
