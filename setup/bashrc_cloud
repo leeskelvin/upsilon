@@ -18,22 +18,35 @@ alias R='R -q --no-save'
 
 # PDF shrink function
 function pdfshrink {
-    PDFNAME=$1
-    PDFTYPE=$2
+    PDFNAME=$@
     if [ -z "$PDFNAME" ]; then
         echo -e "\n    pdfshrink filename [TYPE]\n\n    TYPE 0 = default (72 dpi, subsample/subsample)\n    TYPE 1 = screen (72 dpi, average/average)\n    TYPE 2 = ebook (150 dpi, average/bicubic)\n    TYPE 3 = printer (300 dpi, average/bicubic)\n    TYPE 4 = prepress (300 dpi, bicubic/bicubic)\n"
     else
+        PDFLIST=($PDFNAME)
+        LASTPAR=${PDFLIST[-1]}
+        NUMBERS='^[0-9]+$'
+        if ! [[ $LASTPAR =~ $NUMBERS ]] ; then
+            PDFTYPE=0
+            PDFGOOD=(${PDFLIST[@]::${#PDFLIST[@]}})
+        else
+            PDFTYPE=$LASTPAR
+            PDFGOOD=(${PDFLIST[@]::${#PDFLIST[@]}-1})
+        fi
         if [ -z "$PDFTYPE" ] || [ $PDFTYPE -ge 5 ]; then PDFTYPE="0"; fi
         if [ $PDFTYPE == 0 ]; then dPDFSETTINGS="/default"; fi
         if [ $PDFTYPE == 1 ]; then dPDFSETTINGS="/screen"; fi
         if [ $PDFTYPE == 2 ]; then dPDFSETTINGS="/ebook"; fi
         if [ $PDFTYPE == 3 ]; then dPDFSETTINGS="/printer"; fi
         if [ $PDFTYPE == 4 ]; then dPDFSETTINGS="/prepress"; fi
-        gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=$dPDFSETTINGS -dNOPAUSE -dQUIET -dBATCH -sOutputFile="${1%%.*}.small.${1##*.}" "$1"
+        for i in "${PDFGOOD[@]}"
+        do
+            SMALLPDF="${i%%.*}.small.${i##*.}"
+            if [ ! -f $SMALLPDF ]; then
+                gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=$dPDFSETTINGS -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$SMALLPDF $i
+            fi
+        done
     fi
-    unset PDFTYPE
-    unset PDFNAME
-    unset dPDFSETTINGS
+    unset PDFNAME PDFLIST LASTPAR NUMBERS PDFTYPE PDFGOOD dPDFSETTINGS SMALLPDF
 }
 
 # PDF word count function
