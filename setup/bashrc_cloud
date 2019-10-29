@@ -16,7 +16,7 @@ alias kindleclip='~/software/upsilon/kindleclip.R'
 alias ds9='~/software/ds9/ds9 -mode region -regions shape projection -cmap sls -scale log -scale mode 99.5 -wcs degrees -mecube $@'
 alias R='R -q --no-save'
 alias gs='git status'
-alias gl='git log --all --decorate --oneline --graph'
+alias gl='printf "\n"; git log --graph --pretty=format:"%C(auto)%h %C(red)(%ci)%C(auto)%d %n%s %C(bold blue)<%ae>%n"; printf "\n"'
 alias ga='git add'
 alias gc='git commit'
 
