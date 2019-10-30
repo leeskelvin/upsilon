@@ -15,10 +15,13 @@ alias kindleclip='~/software/upsilon/kindleclip.R'
 # software reworking
 alias ds9='~/software/ds9/ds9 -mode region -regions shape projection -cmap sls -scale log -scale mode 99.5 -wcs degrees -mecube $@'
 alias R='R -q --no-save'
-alias gs='git status'
-alias gl='printf "\n"; git log --graph --pretty=format:"%C(auto)%h %C(red)(%ci)%C(auto)%d %n%s %C(bold blue)<%ae>%n"; printf "\n"'
-alias ga='git add'
-alias gc='git commit'
+alias gstat='git status'
+alias glog='printf "\n"; git log --graph --pretty=format:"%C(auto)%h %C(red)(%ci)%C(auto)%d %n%s %C(bold blue)<%ae>%n"; printf "\n"'
+alias gadd='git add'
+alias gcom='git commit'
+alias gpull='git pull'
+alias gpush='git push'
+alias gfetch='git fetch'
 
 # PDF shrink function
 function pdfshrink {
