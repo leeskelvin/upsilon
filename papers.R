@@ -1,7 +1,7 @@
 #!/usr/bin/Rscript --no-init-file
 
 # definitions
-indir = normalizePath("~/Dropbox/work/archive")
+indir = normalizePath("~/Dropbox/professional/archive")
 librds = paste(indir, "/bibtex.rds", sep="")
 reader = "/usr/bin/evince"
 inputargs = commandArgs(TRUE)
