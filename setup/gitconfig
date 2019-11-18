@@ -28,7 +28,7 @@
     # Shorten common commands
     co = "checkout"
     s = "status"
-    #br = "branch"
+    b = "branch"
     #ci = "commit"
     #d = "diff"
 
