@@ -1,7 +1,7 @@
 #!/usr/bin/Rscript --no-init-file
 
 # definitions
-indir = normalizePath("~/Dropbox/work/archive")
+indir = normalizePath("~/Dropbox/professional/archive")
 outrds = paste(indir, "/bibtex.rds", sep="")
 outbib = paste(indir, "/bibtex.bib", sep="")
 #outtemp = paste(indir, "/bibtex.temp.rds", sep="")
@@ -32,7 +32,7 @@ if(file.exists(outrds)){
 
 # FUNCTION counter
 counter = function(i, total, text = "", overline = FALSE, underline = FALSE, endnewline = TRUE){
-    
+
     toprint = paste("  ", i, " / ", total, " ", sep="")
     if(text != ""){toprint = paste(toprint, ": ", text, " ", sep="")}
     linelen = nchar(toprint) + 1
@@ -59,12 +59,12 @@ counter = function(i, total, text = "", overline = FALSE, underline = FALSE, end
         }
     }
     cat(toprint)
-    
+
 }
 
 # FUNCTION strip
 strip = function(x, strip=" "){
-    
+
     # workhorse function
     sfunc = function(x, strip){
         x = strsplit(x,"")[[1]]
@@ -80,13 +80,13 @@ strip = function(x, strip=" "){
         x = paste(x,collapse="")
         return(x)
     }
-    
+
     # vectorize
     stripped = as.character(Vectorize(sfunc, vectorize.args=c("x"))(x=x, strip=strip))
-    
+
     # return results
     return(stripped)
-    
+
 }
 
 i = 1
@@ -94,12 +94,12 @@ i = 1
 # loop over each necessary entry
 lookup = which(res[,"year"]==-9999)
 for(i in lookup){
-    
+
     # setup
     ref = res[i,"ref"]
     code = res[i,"code"]
     counter(which(lookup==i), length(lookup), ref)
-    
+
 #    # check if a rescan of ADS is necessary
 #    rescan = TRUE
 #    if(ref %in% old[,"ref"]){
@@ -117,23 +117,27 @@ for(i in lookup){
 #    if(rescan){
     # rescan from ADS
     adsurl = paste(mirror, "/abs/", code, sep="")
-    biburl = paste(mirror, "/cgi-bin/nph-bib_query?bibcode=", code, "&data_type=BIBTEX&db_key=AST&nocookieset=1", sep="")
-    
+    biburlold = paste(mirror, "/cgi-bin/nph-bib_query?bibcode=", code, "&data_type=BIBTEX&db_key=AST&nocookieset=1", sep="")
+    biburl = paste(mirror, "/abs/", code, "/exportcitation", sep="")
+
     # get BIBTEX
-    bibfile = readLines(biburl)
-    
+    bibfile = suppressWarnings(readLines(biburl))
+    bibfile = gsub("&#34;", '"', bibfile)
+
     # update reference
-    firstline = grep("@",bibfile)[1]
-    bibtype = tolower(strsplit(bibfile[firstline], "\\{")[[1]][1])
+    firstline = suppressWarnings(grep('readonly=\"\">@',bibfile)[1])
+    bibtype = tolower(strsplit(strsplit(bibfile[firstline], 'readonly=\"\">')[[1]][2], "\\{")[[1]][1])
     bibfile[firstline] = paste(bibtype, "{", ref, ",", sep="")
-    
+    finalline = suppressWarnings(grep('adsnote',bibfile)[1])+1
+
     # pick out metadata
-    title = strip(strsplit(grep("title = ", bibfile, value=TRUE), "title =")[[1]][2], c(" ","{","}",",","\\",'"',"{","}"))
-    year = as.numeric(strip(strsplit(grep("year =", bibfile, value=TRUE), "year =")[[1]][2], c(" ",","," ")))
-    
+    title = suppressWarnings(strip(strsplit(grep("title = ", bibfile, value=TRUE), "title =")[[1]][2], c(" ","{","}",",","\\",'"',"{","}")))
+    year = suppressWarnings(as.numeric(strip(strsplit(grep("year =", bibfile, value=TRUE), "year =")[[1]][2], c(" ",","," ",'"'))))
+
     # generate bibtext entry
-    bibentry = bibfile[firstline:length(bibfile)]
-    
+    bibentry = bibfile[firstline:finalline]
+    if(bibentry[length(bibentry)] != ""){bibentry = c(bibentry,"")}
+
     # arXiv fix (MNRAS compatible)
     if(length(grep("e-prints", bibentry)) > 0){
         bibentry[grep("e-prints", bibentry)] = "  journal = {ArXiv e-prints},"
@@ -141,11 +145,11 @@ for(i in lookup){
         bibentry = bibentry[c(1:vrow,vrow:length(bibentry))]
         bibentry[vrow] = '   volume = "{\\!\\!}",'
     }
-    
+
     # replace %26 with ampersand (principally in HTML URLs)
     if(length(grep("%26", bibentry)) > 0){bibentry = gsub("%26", "&", bibentry)}
 #    }
-    
+
     # add to global
     #res[i,"ref"] = ref
     res[i,"year"] = year
@@ -154,10 +158,10 @@ for(i in lookup){
     #res[i,"adsurl"] = adsurl
     #res[i,"biburl"] = biburl
     res[i,"bibentry"][[1]] = list(bibentry)
-    
+
     ## save global (constant save in case of HTTP break)
     #saveRDS(res, file=outtemp)
-    
+
 }
 
 i = 1
