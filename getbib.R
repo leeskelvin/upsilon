@@ -5,6 +5,8 @@ indir = normalizePath("~/Dropbox/professional/archive")
 outrds = paste(indir, "/bibtex.rds", sep="")
 outbib = paste(indir, "/bibtex.bib", sep="")
 #outtemp = paste(indir, "/bibtex.temp.rds", sep="")
+exiftool = "/usr/bin/exiftool" # check/set PDF title
+file = "/usr/bin/file" # check file mime type
 
 # mirror
 mirror = "http://adsabs.harvard.edu"
@@ -149,6 +151,24 @@ for(i in lookup){
     # replace %26 with ampersand (principally in HTML URLs)
     if(length(grep("%26", bibentry)) > 0){bibentry = gsub("%26", "&", bibentry)}
 #    }
+
+    # check/set PDF title, if PDF, and if appropriate
+    myfile = paste0(indir, "/", files[i])
+    filetype = system(paste0(file, ' --mime-type -b "', myfile, '"'), intern=TRUE)
+    if(filetype == "application/pdf"){
+        # title
+        title.prelim = system(paste0(exiftool, ' -title "', myfile, '"'), intern=TRUE)
+        if(length(title.prelim) > 0){
+            title = strsplit(title.prelim, " : ")[[1]][2]
+        }else{
+            title = ""
+        }
+        if(is.na(title)){title = ""}
+        # set title if necessary
+        if(title != ref){
+            system(paste0(exiftool, ' -title="', ref, '" -overwrite_original_in_place -preserve -quiet -m "', myfile, '"'))
+        }
+    }
 
     # add to global
     #res[i,"ref"] = ref

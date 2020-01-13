@@ -1,7 +1,7 @@
 #!/usr/bin/Rscript --no-init-file
 
 # definitions
-indir = normalizePath("~/Dropbox/work/archive")
+indir = normalizePath("~/Dropbox/professional/archive")
 outrds = paste(indir, "/bibtex.rds", sep="")
 exiftool = "/usr/bin/exiftool" # check/set PDF title
 file = "/usr/bin/file" # check file mime type
