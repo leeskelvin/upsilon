@@ -186,6 +186,20 @@ for(i in lookup){
 
 i = 1
 
+# add R programming language citation
+Rbibentryfull = toBibtex(citation())
+Rbibentry = c(as.character(Rbibentryfull[1:length(Rbibentryfull)]), "")
+Rbibentry[1] = "@manual{RCoreTeam,"
+Ryear = as.numeric(strsplit(strsplit(Rbibentryfull["year"], "\\{")[[1]][2], "\\}")[[1]][1])
+res = rbind(res, data.frame(
+    ref = "RCoreTeam"
+    ,year = Ryear
+    ,title = "R: A Language and Environment for Statistical Computing"
+    ,code = paste0(Ryear, "......RCoreTeam")
+    ,bibentry = NA
+))
+res[nrow(res),"bibentry"][[1]] = list(Rbibentry)
+
 # write results RDS file
 saveRDS(res, file=outrds)
 #unlink(outtemp)
