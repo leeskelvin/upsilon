@@ -13,7 +13,7 @@ bits[,2] = unlist(strsplit(bits[,2], ".pdf"))
 
 # FUNCTION counter
 counter = function(i, total, text = "", overline = FALSE, underline = FALSE, endnewline = TRUE){
-    
+
     toprint = paste("  ", i, " / ", total, " ", sep="")
     if(text != ""){toprint = paste(toprint, ": ", text, " ", sep="")}
     linelen = nchar(toprint) + 1
@@ -40,22 +40,22 @@ counter = function(i, total, text = "", overline = FALSE, underline = FALSE, end
         }
     }
     cat(toprint)
-    
+
 }
 
 # loop
 for(i in 1:length(files)){
-    
+
     #  setup
     ref = bits[i,1]
     code = bits[i,2]
     counter(i, length(files), ref)
     myfile = paste0(indir, "/", files[i])
     filetype = system(paste0(file, ' --mime-type -b "', myfile, '"'), intern=TRUE)
-    
+
     # check/set title only if PDF
     if(filetype == "application/pdf"){
-        
+
         # title
         title.prelim = system(paste0(exiftool, ' -title "', myfile, '"'), intern=TRUE)
         if(length(title.prelim) > 0){
@@ -64,13 +64,13 @@ for(i in 1:length(files)){
             title = ""
         }
         if(is.na(title)){title = ""}
-        
+
         # set title if necessary
         if(title != ref){
             system(paste0(exiftool, ' -title="', ref, '" -overwrite_original_in_place -preserve -quiet -m "', myfile, '"'))
         }
-        
+
     }
-    
+
 }
 

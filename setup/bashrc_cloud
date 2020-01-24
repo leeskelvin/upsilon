@@ -10,9 +10,10 @@ alias sourcebash='source ~/.bashrc'
 PROMPT_COMMAND='echo -ne "\033]0;${USER%@*}@${HOSTNAME%%.*} | ${PWD##*/}\007"'
 
 # base code
-alias getbib='~/software/upsilon/getbib.R'
-alias setbib='~/software/upsilon/setbib.R'
-alias papers='~/software/upsilon/papers.R'
+alias bib='~/software/upsilon/bib.R'
+#alias bibget='~/software/upsilon/bibget.R'
+#alias bibfix='~/software/upsilon/bibfix.R'
+#alias bibadd='~/software/upsilon/bibadd.R'
 alias kindleclip='~/software/upsilon/kindleclip.R'
 
 # software reworking
