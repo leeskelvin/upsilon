@@ -7,8 +7,8 @@ exiftool = "/usr/bin/exiftool"                          # check/set PDF title
 file = "/usr/bin/file"                                  # check file mime type
 
 # mirror
-mirror = "http://adsabs.harvard.edu"
-#mirror = "http://ukads.nottingham.ac.uk"
+#mirror = "http://adsabs.harvard.edu"
+mirror = "http://ukads.nottingham.ac.uk"
 #mirror = "http://ads.nao.ac.jp"
 
 # FUNCTION counter
@@ -66,8 +66,7 @@ strip = function(x, strip=" "){
 
 # split up stacked inputargs, define rds/bib files
 inputargs = commandArgs(TRUE)
-#inputargs = c("-s", "galaxies with", "-yr") # test
-#inputargs = c("-o", "-m", "10")
+#inputargs = c("kelvin1899a", "-o")
 if(length(inputargs)==0){inputargs = "-h"}
 tempargs = as.list(inputargs)
 char1 = substr(tempargs, 1, 1)
@@ -91,6 +90,7 @@ Usage: bib [arg] [INPUT]
 Arguments:
 
 bib -a,--all        (print full paper titles, no truncation)
+bib -b,--bib        (include full bibtex entries in search)
 bib -f,--fix        (run PDF title get/set routine over all PDFs)
 bib -h,--help       (show help file)
 bib -m,--max        (maximum number of entries to print)
@@ -99,7 +99,7 @@ bib -r,--reverse    (reverse order)
 bib -u,--update     (update bibliography from ADS or local bibtex.txt file)
 bib -y,--year       (order by year)
 ")
-    if(file.exists(librds)){cat("\nBibliography currently contains ",nrow(readRDS(librds))," entries.\n", sep="")}
+    if(file.exists(librds)){cat("\nBibliography currently contains \033[1m",nrow(readRDS(librds)),"\033[0m entries.\n", sep="")}
     cat("\n")
 
 }else if(
@@ -199,9 +199,14 @@ bib -y,--year       (order by year)
             biburlold = paste(mirror, "/cgi-bin/nph-bib_query?bibcode=", code, "&data_type=BIBTEX&db_key=AST&nocookieset=1", sep="")
             biburl = paste(mirror, "/abs/", code, "/exportcitation", sep="")
 
-            # get BIBTEX from ADS
+            # get and parse BIBTEX from ADS
             bibfile = suppressWarnings(readLines(biburl))
-            bibfile = gsub("&#34;", '"', bibfile)
+            bibfile = gsub("&amp;", '&', bibfile)       # ampersand (impacts many below)
+            bibfile = gsub("&#34;", '"', bibfile)       # quotation mark
+            bibfile = gsub("\\\\&lt;", '<', bibfile)    # less than
+            bibfile = gsub("\\\\&gt;", '>', bibfile)    # greater than
+            bibfile = gsub("\\\\&le;", '<=', bibfile)   # less than or equal to
+            bibfile = gsub("\\\\&ge;", '>=', bibfile)   # greater than or equal to
 
             # update reference
             firstline = suppressWarnings(grep('readonly=\"\">@',bibfile)[1])
@@ -261,8 +266,7 @@ bib -y,--year       (order by year)
     # write  bibtex file
     bibinfo = unlist(res[,"bibentry"])
     cat(paste(bibinfo, "\n", sep=""), sep="", file=libbib)
-    if(file.exists(librds)){cat("Bibliography currently contains ",nrow(readRDS(librds))," entries.\n", sep="")}
-
+    if(file.exists(librds)){cat("Bibliography currently contains \033[1m",nrow(readRDS(librds)),"\033[0m entries (\033[1m", nrow(res)-nrow(old), "\033[0m new).\n", sep="")}
 
 }else{
 
@@ -274,6 +278,7 @@ bib -y,--year       (order by year)
     titles = dat[,"title"]
     codes = unlist(lapply(dat[,"code"], formatC, mode="character", width=-19))
     nchars = nchar(refs) + nchar(codes)
+    bibentries = unlist(lapply(dat[,"bibentry"], paste, collapse=" "))
 
     # sort by year
     if( (length(grep("-y",inputargs)) > 0)
@@ -284,6 +289,7 @@ bib -y,--year       (order by year)
         years = years[oo]
         titles = titles[oo]
         codes = codes[oo]
+        bibentries = bibentries[oo]
     }
 
     # reverse ordering
@@ -295,6 +301,7 @@ bib -y,--year       (order by year)
         years = years[oo]
         titles = titles[oo]
         codes = codes[oo]
+        bibentries = bibentries[oo]
     }
 
     # maximum number of entries to print
@@ -306,19 +313,16 @@ bib -y,--year       (order by year)
         maxcount = as.numeric(inputargs[varnum])
     }
 
-    # full length titles, trimmed to terminal width using colrm below
-    out1 = paste("\n", paste(paste0("\033[1m", refs, "\033[0m"), codes, titles, sep=" ", collapse="\n"), "\n\n", sep="")
-    out2 = paste("\n", paste(refs, codes, titles, sep=" ", collapse="\n"), "\n\n", sep="")
+    # full length titles, trimmed to terminal width below (possibly incl. bibentries)
+    if( (length(grep("-b",inputargs)) > 0)
+        | (length(grep("--bib",inputargs)) > 0)
+        ){
+        out1 = paste("\n", paste(paste0("\033[1m", refs, "\033[0m"), titles, bibentries, sep=" ", collapse="\n"), "\n\n", sep="")
+    }else{
+        out1 = paste("\n", paste(paste0("\033[1m", refs, "\033[0m"), titles, sep=" ", collapse="\n"), "\n\n", sep="")
+    }
     tmp1 = tempfile()
-    tmp2 = tempfile()
     cat(out1, file=tmp1)
-    cat(out2, file=tmp2)
-
-    # first matched file (for subsequent file opening)
-    allmatches = strsplit(system(paste("cat ", tmp2, " | grep --max-count=", maxcount," --color=never --ignore-case '", inputargs[1], "'", sep=""), intern=T), " +")
-    allmatches = allmatches[lapply(allmatches,length)>0]
-    firstmatch = allmatches[[1]][1:2]
-    firstmatchfile = paste0(indir, "/", firstmatch[1], "::", firstmatch[2], ".pdf")
 
     # print
     if( (length(grep("-a",inputargs)) == 0)
@@ -330,18 +334,49 @@ bib -y,--year       (order by year)
     system(paste("cat ", tmp1, " | grep --max-count=", maxcount," --color=auto --ignore-case '", inputargs[1], "'", sep=""))
     cat("\n")
     system("tput smam")
-    unlink(c(tmp1,tmp2))
+
+    # clean up
+    unlink(tmp1)
 
     # open file?
     if( (length(grep("-o",inputargs)) > 0)
         | (length(grep("--open",inputargs)) > 0)
         ){
+
+        # write greppable tmp file without bolded font
+        if( (length(grep("-b",inputargs)) > 0)
+        | (length(grep("--bib",inputargs)) > 0)
+        ){
+            out2 = paste("\n", paste(refs, titles, bibentries, sep=" ", collapse="\n"), "\n\n", sep="")
+        }else{
+            out2 = paste("\n", paste(refs, titles, sep=" ", collapse="\n"), "\n\n", sep="")
+        }
+        tmp2 = tempfile()
+        cat(out2, file=tmp2)
+
+        # first matched file (for subsequent file opening)
+        allmatches = as.character(suppressWarnings(system(paste("cat ", tmp2, " | grep --max-count=", maxcount," --color=never --ignore-case '", inputargs[1], "'", sep=""), intern=T)))
+        if(length(allmatches) > 0){
+            allmatchessplit = strsplit(allmatches, " +")
+            allmatchessplit = allmatchessplit[lapply(allmatchessplit,length)>0]
+            firstmatchref = allmatchessplit[[1]][1]
+            firstmatchcode = codes[which(strip(refs) == firstmatchref)]
+            firstmatchfile = paste0(indir, "/", firstmatchref, "::", firstmatchcode, ".pdf")
+        }else{
+            firstmatchfile = NULL
+        }
+
+        # open file
         if(length(firstmatchfile) > 0){
             comm = paste(reader, ' "', firstmatchfile, '" &', sep="")
             system(comm)
         }else{
             cat("ERROR: no file found\n")
         }
+
+        # clean up
+        unlink(tmp2)
+
     }
 
 }
