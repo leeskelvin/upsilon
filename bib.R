@@ -261,7 +261,7 @@ bib -y,--year       (order by year)
     # write  bibtex file
     bibinfo = unlist(res[,"bibentry"])
     cat(paste(bibinfo, "\n", sep=""), sep="", file=libbib)
-    cat("Bibliography up to date!\n")
+    if(file.exists(librds)){cat("Bibliography currently contains ",nrow(readRDS(librds))," entries.\n", sep="")}
 
 
 }else{
