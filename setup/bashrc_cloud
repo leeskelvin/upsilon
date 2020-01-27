@@ -19,6 +19,7 @@ alias kindleclip='~/software/upsilon/kindleclip.R'
 # software reworking
 alias ds9='ds9 -mode region -regions shape projection -cmap sls -scale log -scale mode 99.5 -wcs degrees -mecube $@'
 alias R='R -q --no-save'
+alias ipy='ipython --no-banner'
 #alias gstat='git status'
 #alias glogall='printf "\n"; git log --graph --pretty=tformat:"%C(auto)%h %C(red)(%ci)%C(auto)%d %n%s %C(bold blue)<%ae>%n"'
 #alias glog='printf "\n"; git log --graph --pretty=tformat:"%C(auto)%h %C(red)(%ci)%C(auto)%d %n%s %C(bold blue)<%ae>%n" -9'

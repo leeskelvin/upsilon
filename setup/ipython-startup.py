@@ -1,6 +1,7 @@
 # system imports
 import sys
 import os
+import warnings
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -11,7 +12,10 @@ plt.ion()
 
 
 # LSST stack imports
-import lsst.daf.persistence as dafPersist
-import lsst.afw.display as afwDisplay
-from lsst.ip.isr import IsrTask
-import lsst.afw.detection as afwDetection
+try:
+    import lsst.daf.persistence as dafPersist
+    import lsst.afw.display as afwDisplay
+    from lsst.ip.isr import IsrTask
+    import lsst.afw.detection as afwDetection
+except ImportError:
+    warnings.warn('failed to import LSST modules')
