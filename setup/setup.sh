@@ -4,6 +4,7 @@
 touch ~/.bashrc_local
 mkdir -p ~/.R/lib
 mkdir -p ~/.vim/ftplugin
+mkdir -p ~/.ipython/profile_default/startup
 ln -sf "$(pwd)"/bashrc_cloud ~/.bashrc_cloud
 ln -sf "$(pwd)"/Renviron ~/.Renviron
 ln -sf "$(pwd)"/Rprofile ~/.Rprofile
@@ -12,6 +13,7 @@ ln -sf "$(pwd)"/gitconfig ~/.gitconfig
 ln -sf "$(pwd)"/vimrc ~/.vimrc
 ln -sf "$(pwd)"/ftplugin-c.vim ~/.vim/ftplugin/c.vim
 ln -sf "$(pwd)"/ftplugin-python.vim ~/.vim/ftplugin/python.vim
+ln -sf "$(pwd)"/ipython-startup.py ~/.ipython/profile_default/startup/ipython-startup.py
 
 # templates
 mkdir -p ~/.templates
