@@ -5,11 +5,12 @@ import warnings
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+import astropy.stats as stats
+from collections import Counter as count
+
+# plotting specific
 matplotlib.use('Qt5Agg')
 plt.ion()
-
-# LSK defaults
-
 
 # LSST stack imports
 try:
