@@ -7,6 +7,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import astropy.stats as stats
 from collections import Counter as count
+import pandas as pd
 
 # plotting specific
 matplotlib.use('Qt5Agg')
