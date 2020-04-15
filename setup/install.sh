@@ -21,11 +21,12 @@ rm -Rf ~/Desktop/google-chrome-stable_current_amd64.deb
 fi
 
 # cexamples
-if [ ! -f ~/software/cexamples/fitscopy ]; then
+if [ ! -f ~/.local/bin/imcopy ]; then
 tar -xvf cexamples.tar -C ~/software/
 for filename in ~/software/cexamples/*.c; do
-gcc -o ~/software/cexamples/$(basename "$filename" .c) $filename -L. -I/usr/include/cfitsio -lcfitsio -lm
+gcc -o ~/.local/bin/$(basename "$filename" .c) $filename -L. -I/usr/include/cfitsio -lcfitsio -lm
 done
+rm -Rf ~/software/cexamples
 fi
 
 # ds9-lee
