@@ -97,6 +97,7 @@ bib -m,--max        (maximum number of entries to print)
 bib -o,--open       (open first matching search entry in PDF reader)
 bib -r,--reverse    (reverse order)
 bib -u,--update     (update bibliography from ADS or local bibtex.txt file)
+bib -w,--whole      (update bibliography from ADS or local and re-scan local)
 bib -y,--year       (order by year)
 ")
     if(file.exists(librds)){cat("\nBibliography currently contains \033[1m",nrow(readRDS(librds)),"\033[0m entries.\n", sep="")}
@@ -146,6 +147,8 @@ bib -y,--year       (order by year)
 }else if(
     (length(grep("-u",inputargs)) > 0)
     | (length(grep("--update",inputargs)) > 0)
+    | (length(grep("-w",inputargs)) > 0)
+    | (length(grep("--whole",inputargs)) > 0)
     ){
 
     # data
@@ -173,7 +176,11 @@ bib -y,--year       (order by year)
     }
 
     # loop over each necessary entry
-    lookup = which(res[,"year"]==-9999)
+    if((length(grep("-w",inputargs)) > 0) | (length(grep("--whole",inputargs)) > 0)){
+        lookup = which(res[,"year"]==-9999 | res[,"code"]=="bibtex.txt")
+    }else{
+        lookup = which(res[,"year"]==-9999)
+    }
     for(i in lookup){
 
         # setup
