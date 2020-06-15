@@ -18,6 +18,7 @@ alias kindleclip='~/software/upsilon/kindleclip.R'
 
 # software reworking
 alias ds9='~/software/ds9/ds9 -mode region -regions shape projection -cmap sls -scale log -scale mode 99.5 -wcs degrees -mecube $@'
+alias topcat='~/software/topcat/topcat'
 alias R='R -q --no-save'
 alias ipy='ipython --no-banner'
 alias f8='flake8 --ignore=E133,E226,E228,N802,N803,N806,N812,N813,N815,N816,W503 --max-line-length=110 --max-doc-length=79 $@'
@@ -29,6 +30,20 @@ alias f8='flake8 --ignore=E133,E226,E228,N802,N803,N806,N812,N813,N815,N816,W503
 #alias gpull='git pull'
 #alias gpush='git push'
 #alias gfetch='git fetch'
+
+# gzip --best function
+function gzbest {
+    PREZIP=$1
+    if [ -z "$PREZIP" ]; then
+        echo "gbest is aliased to \`gzip --best \$@'";
+    else
+        POSTZIP="${PREZIP}.gz";
+        oldsize=$(du -h "$PREZIP" | awk '{print $1}');
+        gzip --best $PREZIP
+        newsize=$(du -h "$POSTZIP" | awk '{print $1}');
+        echo "$PREZIP gzipped: $oldsize to $newsize";
+    fi
+}
 
 # PDF shrink function
 function pdfshrink {
