@@ -3,6 +3,7 @@
 	email = lkelvin@astro.princeton.edu
 [core]
 	editor = vim
+	excludesfile = /home/lskelvin/.gitignore
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
