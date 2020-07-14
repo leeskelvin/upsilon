@@ -1,3 +1,4 @@
+" editor setup
 set shiftwidth=4
 set softtabstop=4
 set expandtab
@@ -10,15 +11,16 @@ filetype plugin indent on
 syntax on
 set clipboard=unnamedplus
 
-" copy/paste without auto-indent
+" automatically set paste mode when pasting in insert mode (no auto-indent)
 let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
-
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-
 function! XTermPasteBegin()
     set pastetoggle=<Esc>[201~
     set paste
-return ""
+    return ""
 endfunction
+
+" always start in top-left corner of a gitcommit
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
