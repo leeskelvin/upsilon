@@ -89,7 +89,7 @@ function pdfwc {
     unset INPUTFILE
 }
 
-# ls aliases
+# common aliases
 alias ls='/bin/ls --color=auto'
 alias la='/bin/ls -A --color=auto'
 alias l='/bin/ls -l --color=auto'
@@ -104,6 +104,7 @@ alias g='/bin/ls -gG --color=auto'
 alias gg='/bin/ls -AgG --color=auto'
 alias gh='/bin/ls -gGh --color=auto'
 alias ggh='/bin/ls -AgGh --color=auto'
+alias cdp='cd -P'
 
 # source local bashrc file
 if [ -f ~/.bashrc_local ]; then
