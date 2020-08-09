@@ -207,7 +207,7 @@ bib -y,--year       (order by year)
             biburl = paste(mirror, "/abs/", code, "/exportcitation", sep="")
 
             # get and parse BIBTEX from ADS
-            bibfile = suppressWarnings(readLines(biburl))
+            bibfile = suppressWarnings(readLines(biburl, encoding='UTF-8'))
             bibfile = gsub("&amp;", '&', bibfile)       # ampersand (impacts many below)
             bibfile = gsub("&#34;", '"', bibfile)       # quotation mark
             bibfile = gsub("\\\\&lt;", '<', bibfile)    # less than
@@ -239,6 +239,9 @@ bib -y,--year       (order by year)
 
             # replace %26 with ampersand (principally in HTML URLs)
             if(length(grep("%26", bibentry)) > 0){bibentry = gsub("%26", "&", bibentry)}
+
+            # replace &#39; with '
+            if(length(grep("&#39;", bibentry)) > 0){bibentry = gsub("&#39;", "'", bibentry)}
 
         }
 
