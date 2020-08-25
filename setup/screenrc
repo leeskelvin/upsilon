@@ -30,7 +30,8 @@ altscreen on
 hardstatus on
 hardstatus alwayslastline
 #hardstatus string "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
-hardstatus string "%{.KW}%-w%{.WK}%n %{-}%?%+w%?%{=b KW} %=[%Y-%m-%d %c]"
+hardstatus string "%{=b KW}%S%{= KW}   %-w%{.WK}%n %{-}%?%+w%?%{=b KW} %=[%Y-%m-%d %c]"
+
 #hardstatus string "%{.kW}%-w%{.B}%n %{-}%?%+w%?%{=b kw} %=[%Y-%m-%d %c]"
 #hardstatus string "%{.kW}%-w%{.B}%n %t%{-}%{=b kw}%?%+w%? %=||%Y-%m-%d %c" # B&W & date&time
 #hardstatus string "%{= kG}[%{G}%H]%{g}[%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c%{g}]"
