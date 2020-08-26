@@ -34,7 +34,7 @@
     #d = "diff"
 
     # log some
-    l = "log --graph --pretty=tformat:'%C(auto)%h %C(red)(%ci)%C(auto)%d %n%s %C(bold blue)<%ae>%n' -9"
+    l = "log --graph --pretty=tformat:'%C(auto)%h %C(red)(%ci)%C(auto)%d %n%s %C(bold blue)<%ae>%n' -12"
 
     # log all
     ll = "log --graph --pretty=tformat:'%C(auto)%h %C(red)(%ci)%C(auto)%d %n%s %C(bold blue)<%ae>%n'"
