@@ -26,8 +26,9 @@ alias eg='eups list | grep $@'
 alias eglocal='eups list | grep LOCAL'
 alias eglsst='eups list | grep lsst_distrib'
 alias setlsst='setup lsst_distrib ; eups list | grep lsst_distrib | grep setup'
-alias sls='screen -ls'
+alias sl='screen -ls'
 alias sr='screen -r $@'
+alias ss='screen -S $@'
 #alias gstat='git status'
 #alias glogall='printf "\n"; git log --graph --pretty=tformat:"%C(auto)%h %C(red)(%ci)%C(auto)%d %n%s %C(bold blue)<%ae>%n"'
 #alias glog='printf "\n"; git log --graph --pretty=tformat:"%C(auto)%h %C(red)(%ci)%C(auto)%d %n%s %C(bold blue)<%ae>%n" -9'
@@ -95,6 +96,19 @@ function pdfwc {
     unset INPUTFILE
 }
 
+# cd parent/project folder
+function cdp {
+    if [ "$#" -eq 1 ]; then
+        cd -P $@
+    else
+        if [ -d ~/project ]; then
+            cd -P ~/project
+        else
+            cd
+        fi
+    fi
+}
+
 # common aliases
 alias ls='/bin/ls --color=auto'
 alias la='/bin/ls -A --color=auto'
@@ -110,7 +124,7 @@ alias g='/bin/ls -gG --color=auto'
 alias gg='/bin/ls -AgG --color=auto'
 alias gh='/bin/ls -gGh --color=auto'
 alias ggh='/bin/ls -AgGh --color=auto'
-alias cdp='cd -P'
+#alias cdp='cd -P'
 
 # source local bashrc file
 if [ -f ~/.bashrc_local ]; then
