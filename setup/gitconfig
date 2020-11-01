@@ -11,6 +11,8 @@
 	required = true
 [push]
 	default = simple
+[pull]
+    ff = only
 
 # Cache anonymous access to DM Git LFS S3 servers
 [credential "https://lsst-sqre-prod-git-lfs.s3-us-west-2.amazonaws.com"]
@@ -18,7 +20,7 @@
 [credential "https://s3.lsst.codes"]
 	helper = store
 [credential]
-    helper = store
+	helper = store
 
 [alias]
     # List things
@@ -31,7 +33,7 @@
     s = "status"
     b = "branch"
     #ci = "commit"
-    #d = "diff"
+    d = "diff"
 
     # log some
     l = "log --graph --pretty=tformat:'%C(auto)%h %C(red)(%ci)%C(auto)%d %n%s %C(bold blue)<%ae>%n' -9"
@@ -68,5 +70,5 @@
 
     # Create a commit that will be automatically squashed as a fixup when you
     # run `git rebase --autosquash`
-    fixup = "commit --fixup=HEAD"i
+    fixup = "commit --fixup=HEAD"
 
