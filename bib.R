@@ -207,7 +207,7 @@ bib -y,--year       (order by year)
             biburl = paste(mirror, "/abs/", code, "/exportcitation", sep="")
 
             # get and parse BIBTEX from ADS
-            bibfile = suppressWarnings(readLines(biburl, encoding='UTF-8'))
+            bibfile = suppressWarnings(readLines(biburl, skipNul=TRUE))
             bibfile = gsub("&amp;", '&', bibfile)       # ampersand (impacts many below)
             bibfile = gsub("&#34;", '"', bibfile)       # quotation mark
             bibfile = gsub("\\\\&lt;", '<', bibfile)    # less than
