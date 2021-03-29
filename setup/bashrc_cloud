@@ -10,7 +10,7 @@ alias sourcebash='source ~/.bashrc'
 PROMPT_COMMAND='echo -ne "\033]0;${USER%@*}@${HOSTNAME%%.*} | ${PWD##*/}\007"'
 
 # base code
-alias bib='~/software/upsilon/bib.R'
+alias bib='~/software/upsilon/bib/bib.py'
 #alias kindleclip='~/software/upsilon/kindleclip.R'
 
 # software reworking
