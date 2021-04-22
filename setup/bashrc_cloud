@@ -10,7 +10,7 @@ alias sourcebash='source ~/.bashrc'
 PROMPT_COMMAND='echo -ne "\033]0;${USER%@*}@${HOSTNAME%%.*} | ${PWD##*/}\007"'
 
 # base code
-alias bib='~/software/upsilon/bib/bib.py'
+alias bib='~/software/upsilon/bib.py'
 #alias kindleclip='~/software/upsilon/kindleclip.R'
 
 # software reworking
@@ -72,7 +72,7 @@ function pdfshrink {
         if [ $PDFTYPE == 4 ]; then dPDFSETTINGS="/prepress"; fi
         for i in "${PDFGOOD[@]}"
         do
-            SMALLPDF="${i%%.*}.small.${i##*.}"
+            SMALLPDF=${i%.pdf}.small.pdf
             if [ ! -f $SMALLPDF ]; then
                 gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=$dPDFSETTINGS -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$SMALLPDF $i
             fi

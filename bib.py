@@ -3,15 +3,16 @@
 import os
 import sys
 import tempfile
+import warnings
 import pandas as pd
 import urllib.request
 
-pdfdir = os.path.expanduser('~/Dropbox/professional/archive')   # PDF dir
-bibdir = os.path.expanduser('~/software/upsilon/bib')           # bibtex dir
-reader = '/usr/bin/evince'                                      # PDF reader
-exiftool = '/usr/bin/exiftool'                                  # mod PDF title
-file = '/usr/bin/file'                                          # mime types
-bibfile = bibdir + '/bibtex.bib'                                # bibtex file
+pdfdir = os.path.expanduser('~/Dropbox/professional/archive')  # PDF dir
+bibfile = pdfdir + '/bibtex.bib'  # local bibtex file
+bibdbox = 'https://www.dropbox.com/s/9pk9f2cgprym6aa/bibtex.bib?raw=1'  # DBox
+reader = '/usr/bin/evince'  # PDF reader
+exiftool = '/usr/bin/exiftool'  # mod PDF title
+file = '/usr/bin/file'  # mime types
 
 mirror = "http://adsabs.harvard.edu"
 # mirror = "http://ukads.nottingham.ac.uk"
@@ -44,8 +45,11 @@ args.sort(reverse=True)
 
 
 def bibread(bibfile):
-    with open(bibfile) as f:
-        bibdat = [x for x in f.readlines() if x != '\n']
+    if isinstance(bibfile, list):
+        bibdat = [f'{x}\n' for x in bibfile if x != '']
+    else:
+        with open(bibfile) as f:
+            bibdat = [x for x in f.readlines() if x != '\n']
     if bibdat[-1][-1:] != '\n':
         bibdat[-1] += '\n'
     rows = [i for i, x in enumerate(bibdat) if '@' in x] + [len(bibdat)+1]
@@ -77,6 +81,14 @@ def bibwrite(df, bibfile):
 
 try:
     df = bibread(bibfile)
+except FileNotFoundError:
+    print('')
+    warnings.warn(f'Local bibtex file not found; using remote copy.',
+                  stacklevel=2)
+    response = urllib.request.urlopen(bibdbox)
+    data = response.read()
+    bibdata = data.decode('utf-8').split('\n')
+    df = bibread(bibdata)
 except Exception:
     raise
 
